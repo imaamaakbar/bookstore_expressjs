@@ -5,7 +5,9 @@ const Book = require('../models').Book;
 // @access  Public
 exports.getBooks = async (req, res) => {
   try {
-    const books = await Book.findAll();
+    const books = await Book.findAll({
+      attributes : {exclude : ["createdAt","updatedAt"]}
+    });
     res.json(books);
   } catch (err) {
     console.error(err.message);
@@ -17,6 +19,7 @@ exports.getBooks = async (req, res) => {
 // @desc    Add new book
 // @access  Private
 exports.addBook = async (req, res) => {
+  console.log(req.body);
   const { title, author, publishedDate, pages, genre } = req.body;
 
   try {
