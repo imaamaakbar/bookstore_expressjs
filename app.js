@@ -3,13 +3,14 @@ const bodyParser = require('body-parser');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 const formData = require('express-form-data');
-
+const cors = require('cors')
 
 var logger = require('morgan');
 
 var apiRouter = require('./routes/api');
 
 var app = express();
+app.use(cors())
 app.use(formData.parse());
 app.use(logger('dev'));
 app.use(express.json());
